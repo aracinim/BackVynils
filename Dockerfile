@@ -4,8 +4,10 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm ci --only=production
+RUN npm install --quiet
 
-COPY --from=builder /usr/src/app/dist ./dist
+COPY . .
 
-CMD ["npm", "run", "start:prod"]
+RUN npm run build
+
+CMD ["npm", "run", "start"]
